@@ -4,7 +4,9 @@ go 1.14
 
 require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
+	github.com/stretchr/testify v1.6.0 // indirect
 	go.uber.org/zap v1.15.0
+	gopkg.in/yaml.v2 v2.3.0 // indirect
 	k8s.io/api v0.16.9
 	k8s.io/apimachinery v0.16.9
 	k8s.io/client-go v0.16.9
