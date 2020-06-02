@@ -12,7 +12,7 @@ import (
 
 type K8S interface {
 	GetPod(name string, namespace string) (*v1.Pod, error)
-	GetCurrentNamespace() (string, error)
+	GetCurrentNamespace() string
 	CreatePod(name string, namespace string) error
 	CreateNamespace(name string) error
 	DeletePod(name string, namespace string) error
