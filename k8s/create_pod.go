@@ -7,10 +7,6 @@ import (
 )
 
 func (k8s *k8SClient) CreatePod(name string, namespace string) error {
-	watch, err := k8s.clientset.CoreV1().Pods(namespace).Watch(metav1.ListOptions{
-		Pod,
-	})
-
 	pod, err := k8s.clientset.CoreV1().Pods(namespace).Create(&v1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
 			Name: name,
@@ -31,8 +27,8 @@ func (k8s *k8SClient) CreatePod(name string, namespace string) error {
 					Args:                   []string{},
 				},
 			},
-			//RestartPolicy: v1.RestartPolicyAlways,
-			//DNSPolicy:     v1.DNSDefault,
+			RestartPolicy: v1.RestartPolicyOnFailure,
+			DNSPolicy:     v1.DNSDefault,
 		}})
 	if err != nil {
 		return err
