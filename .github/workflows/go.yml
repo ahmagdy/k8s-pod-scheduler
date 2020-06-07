@@ -38,7 +38,7 @@ jobs:
         sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
         sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
         rm -f $PROTOC_ZIP  
-        # bash ./script/generate_proto.sh
+        bash ./script/generate_proto.sh
 
     - name: Build
       run: go build -v .
