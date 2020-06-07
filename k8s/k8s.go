@@ -2,6 +2,7 @@ package k8s
 
 import (
 	"os"
+	"path/filepath"
 
 	"k8s.io/client-go/tools/clientcmd"
 
@@ -26,8 +27,13 @@ type k8SClient struct {
 var _ K8S = (*k8SClient)(nil)
 
 func New(logger *zap.Logger) (K8S, error) {
-	config, err := clientcmd.BuildConfigFromFlags("", homeDir())
+	var kubeconf string
+	if home := homeDir(); home != "" {
+		kubeconf = filepath.Join(home, ".kube", "config")
+	}
+	config, err := clientcmd.BuildConfigFromFlags("", kubeconf)
 	if err != nil {
+		logger.Warn("CATCH HERE")
 		return nil, err
 	}
 
