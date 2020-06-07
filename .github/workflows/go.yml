@@ -33,9 +33,11 @@ jobs:
     - name: Generate Proto
       run: |
         go get -u github.com/golang/protobuf/protoc-gen-go
-        echo $GOPATH
-        echo $GOROOT
-        /usr/local/bin/protoc --go_out=plugins=grpc:. idl/job.proto
+        PROTOC_ZIP=protoc-3.6.1-linux-x86_64.zip
+        curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/$PROTOC_ZIP
+        sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
+        sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
+        rm -f $PROTOC_ZIP  
         # bash ./script/generate_proto.sh
 
     - name: Build
