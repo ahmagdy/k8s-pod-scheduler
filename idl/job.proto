@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+package job;
+option go_package = "job;job";
+
+
+message Job{
+    google.protobuf.StringValue name = 1;
+    google.protobuf.StringValue cron = 4;
+    Spec spec = 3;
+}
+
+message Spec{
+    google.protobuf.StringValue image = 1;
+    string args = 2;
+    repeated string commands = 3;
+}
+
+service JobService{
+    rpc Add (AddJobRequest) returns (AddJobResponse);
+}
+
+message AddJobRequest {
+    Job job = 1;
+}
+
+message AddJobResponse {
+    int32 id = 1;
+}
