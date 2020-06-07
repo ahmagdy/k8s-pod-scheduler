@@ -31,7 +31,9 @@ jobs:
         fi
 
     - name: Generate Proto
-      run: ./script/generate_proto.sh
+      run: |
+        go get -u github.com/golang/protobuf/protoc-gen-go
+        ./script/generate_proto.sh
 
     - name: Build
       run: go build -v .
