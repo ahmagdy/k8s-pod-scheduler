@@ -33,7 +33,7 @@ jobs:
     - name: Generate Proto
       run: |
         go get -u github.com/golang/protobuf/protoc-gen-go
-        sh -c "./script/generate_proto.sh"
+        bash ./script/generate_proto.sh
 
     - name: Build
       run: go build -v .
