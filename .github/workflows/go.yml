@@ -44,6 +44,7 @@ jobs:
         unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
         unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
         rm -f $PROTOC_ZIP  
+        chmod -R 664 /usr/local/bin
         chmod -R 664 /usr/local/include/google/protobuf
         bash ./script/generate_proto.sh
 
