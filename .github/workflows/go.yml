@@ -41,6 +41,7 @@ jobs:
         go get -u github.com/golang/protobuf/protoc-gen-go
         echo $GOPATH
         echo $GOROOT
+        /usr/local/bin/protoc --go_out=plugins=grpc:. idl/job.proto
         # bash ./script/generate_proto.sh
 
     - name: Build
