@@ -38,10 +38,14 @@ jobs:
 
     - name: Generate Proto
       run: |
+        go get -u github.com/golang/protobuf/protoc-gen-go
         bash ./script/generate_proto.sh
 
     - name: Build
-      run: go build -v .
+      run: |
+        ls
+        pwd
+        go build -v .
 
     - name: Test
       run: go test -v .
