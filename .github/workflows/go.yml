@@ -44,6 +44,7 @@ jobs:
     - name: Build
       run: |
         ls
+        pwd
         go build -v .
 
     - name: Test
