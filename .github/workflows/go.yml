@@ -42,7 +42,9 @@ jobs:
         bash ./script/generate_proto.sh
 
     - name: Build
-      run: go build -v .
+      run: |
+        ls
+        go build -v .
 
     - name: Test
       run: go test -v .
