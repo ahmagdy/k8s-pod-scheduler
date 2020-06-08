@@ -18,7 +18,13 @@ jobs:
       with:
         go-version: ^1.14
       id: go
-
+      
+    - name: Setup protoc
+      uses: arduino/setup-protoc@v1.1.0
+      with:
+        # Version to use. Example: 3.9.1
+        version: 3.6.1
+    
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
@@ -32,7 +38,6 @@ jobs:
 
     - name: Generate Proto
       run: |
-        go get -u github.com/golang/protobuf/protoc-gen-go
         bash ./script/generate_proto.sh
 
     - name: Build
