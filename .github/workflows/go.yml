@@ -41,10 +41,12 @@ jobs:
         go get -u github.com/golang/protobuf/protoc-gen-go
         bash ./script/generate_proto.sh
 
+    - name: Lint
+      run: |
+        golint ./...
+
     - name: Build
       run: |
-        ls
-        pwd
         go build -v .
 
     - name: Test
