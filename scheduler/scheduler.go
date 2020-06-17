@@ -9,7 +9,7 @@ import (
 
 type Scheduler interface {
 	Start()
-	Add(job *job.Job) error
+	Add(job *job.SchedulerJob) error
 	Exists(jobName string) bool
 }
 
