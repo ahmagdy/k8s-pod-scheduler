@@ -39,10 +39,12 @@ jobs:
     - name: Generate Proto
       run: |
         go get -u github.com/golang/protobuf/protoc-gen-go
-        bash ./script/generate_proto.sh
+        bash ./scripts/generate_proto.sh
 
     - name: Lint
       run: |
+        go env
+        go install golang.org/x/lint/golint
         golint ./...
 
     - name: Build
