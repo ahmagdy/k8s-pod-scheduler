@@ -45,11 +45,14 @@ jobs:
       run: |
         go env
         go install golang.org/x/lint/golint
-        golint ./...
+        golint -set_exit_status ./...
 
     - name: Build
       run: |
-        go build -v .
+        pwd
+        echo "sdsdsd"
+        ls
+        go build
 
     - name: Test
       run: go test -v .
