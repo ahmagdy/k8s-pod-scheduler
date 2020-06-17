@@ -44,7 +44,7 @@ jobs:
     - name: Lint
       run: |
         go install golang.org/x/lint/golint
-#        golint -set_exit_status ./...
+        golint -set_exit_status ./...
 
     - name: Build
       run: |
