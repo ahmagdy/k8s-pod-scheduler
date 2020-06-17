@@ -19,7 +19,7 @@ type server struct{}
 
 func (s *server) Add(ctx context.Context, req *job.AddJobRequest) (*job.AddJobResponse, error) {
 	// TODO: Validate input fields
-	j := job.JobToSchedulerJob(req.Job)
+	j := job.SchedulerJobFromJob(req.Job)
 	fmt.Println(j.Name)
 
 	return nil, nil
