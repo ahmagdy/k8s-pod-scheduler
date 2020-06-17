@@ -8,6 +8,7 @@ import (
 	"github.com/Ahmad-Magdy/k8s-pod-scheduler/job"
 )
 
+// Add to register a job in the scheduler
 func (c *CronScheduler) Add(job *job.SchedulerJob) error {
 	id, err := c.cron.AddFunc(job.Cron, func() {
 		// 15:04:05

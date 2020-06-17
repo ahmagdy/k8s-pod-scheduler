@@ -7,12 +7,14 @@ import (
 	"go.uber.org/zap"
 )
 
+// Scheduler an interface for the scheduler operations
 type Scheduler interface {
 	Start()
 	Add(job *job.SchedulerJob) error
 	Exists(jobName string) bool
 }
 
+// CronScheduler Implementation for Scheduler interface contains the needed properties
 type CronScheduler struct {
 	log            *zap.Logger
 	cron           *cron.Cron
@@ -22,6 +24,7 @@ type CronScheduler struct {
 
 var _ Scheduler = (*CronScheduler)(nil)
 
+// New instance of Scheduler
 func New(logger *zap.Logger, k8s k8s.K8S) Scheduler {
 	cron := cron.New(cron.WithSeconds())
 	n := k8s.GetCurrentNamespace()

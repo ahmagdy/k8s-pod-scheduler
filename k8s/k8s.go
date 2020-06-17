@@ -11,6 +11,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
+// K8S service interface, that should abstract all k8s sdk details away
 type K8S interface {
 	GetPod(name string, namespace string) (*v1.Pod, error)
 	GetCurrentNamespace() string
@@ -19,6 +20,7 @@ type K8S interface {
 	DeletePod(name string, namespace string) error
 }
 
+// k8SClient implementation of K8S interface
 type k8SClient struct {
 	log       *zap.Logger
 	clientset *kubernetes.Clientset
@@ -26,6 +28,7 @@ type k8SClient struct {
 
 var _ K8S = (*k8SClient)(nil)
 
+// New instace of K8S concrete implementation
 func New(logger *zap.Logger) (K8S, error) {
 	var kubeconf string
 	if home := homeDir(); home != "" {
