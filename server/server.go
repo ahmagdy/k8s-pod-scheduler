@@ -1,38 +1,25 @@
-package main
+package server
 
 import (
-	"context"
-	"fmt"
-	"log"
-	"net"
+	"go.uber.org/zap"
 
 	job "github.com/Ahmad-Magdy/k8s-pod-scheduler/job"
+	sc "github.com/Ahmad-Magdy/k8s-pod-scheduler/scheduler"
 
 	"google.golang.org/grpc"
 )
 
-const (
-	_port = ":8080"
-)
-
-type server struct{}
-
-func (s *server) Add(ctx context.Context, req *job.AddJobRequest) (*job.AddJobResponse, error) {
-	// TODO: Validate input fields
-	j := job.SchedulerJobFromJob(req.Job)
-	fmt.Println(j.Name)
-
-	return nil, nil
+type K8SgRPC struct {
+	log       *zap.Logger
+	scheduler sc.Scheduler
 }
 
-func main() {
-	lis, err := net.Listen("tcp", _port)
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+func New(logger *zap.Logger, scheduler sc.Scheduler) *grpc.Server {
+	server := &K8SgRPC{
+		log:       logger,
+		scheduler: scheduler,
 	}
-	s := grpc.NewServer()
-	job.RegisterJobServiceServer(s, &server{})
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
+	grpcServer := grpc.NewServer()
+	job.RegisterJobServiceServer(grpcServer, server)
+	return grpcServer
 }
