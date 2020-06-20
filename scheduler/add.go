@@ -9,7 +9,7 @@ import (
 )
 
 // Add to register a job in the scheduler
-func (c *CronScheduler) Add(job *job.SchedulerJob) error {
+func (c *CronScheduler) Add(job *job.SchedulerJob) (jobID string, err error) {
 	id, err := c.cron.AddFunc(job.Cron, func() {
 		// 15:04:05
 		startTime := time.Now()
@@ -22,8 +22,8 @@ func (c *CronScheduler) Add(job *job.SchedulerJob) error {
 			zap.Int64("execution_time", time.Since(startTime).Milliseconds()))
 	})
 	if err != nil {
-		return err
+		return "", err
 	}
 	c.registeredJobs[job.Name] = int(id)
-	return nil
+	return job.Name, nil
 }

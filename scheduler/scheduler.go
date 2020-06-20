@@ -10,7 +10,7 @@ import (
 // Scheduler an interface for the scheduler operations
 type Scheduler interface {
 	Start()
-	Add(job *job.SchedulerJob) error
+	Add(job *job.SchedulerJob) (jobID string, err error)
 	Exists(jobName string) bool
 }
 

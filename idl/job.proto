@@ -25,5 +25,5 @@ message AddJobRequest {
 }
 
 message AddJobResponse {
-    int32 id = 1;
+    string id = 1;
 }
