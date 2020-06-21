@@ -9,7 +9,6 @@ import (
 
 // Scheduler an interface for the scheduler operations
 type Scheduler interface {
-	Start()
 	Add(job *job.SchedulerJob) (jobID string, err error)
 	Exists(jobName string) bool
 }
@@ -29,10 +28,12 @@ func New(logger *zap.Logger, k8s k8s.K8S) Scheduler {
 	cron := cron.New(cron.WithSeconds())
 	n := k8s.GetCurrentNamespace()
 	logger.Info(n)
-	return &CronScheduler{
+	s := &CronScheduler{
 		log:            logger,
 		cron:           cron,
 		k8s:            k8s,
 		registeredJobs: make(map[string]int),
 	}
+	cron.Start()
+	return s
 }
