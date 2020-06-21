@@ -10,6 +10,7 @@ import (
 
 // Add to register a job in the scheduler
 func (c *CronScheduler) Add(job *job.SchedulerJob) (jobID string, err error) {
+	c.log.Info("Adding job", zap.String("job_name", job.Name), zap.String("cron_expression", job.Cron))
 	id, err := c.cron.AddFunc(job.Cron, func() {
 		// 15:04:05
 		startTime := time.Now()
