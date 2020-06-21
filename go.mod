@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/golang/protobuf v1.4.2
+	github.com/google/wire v0.4.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/stretchr/testify v1.6.0 // indirect
 	go.uber.org/zap v1.15.0
