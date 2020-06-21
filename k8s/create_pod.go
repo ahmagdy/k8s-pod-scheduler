@@ -11,7 +11,7 @@ func (k8s *k8SClient) CreatePod(name string, namespace string) error {
 		ObjectMeta: metav1.ObjectMeta{
 			Name: name,
 			Labels: map[string]string{
-				"name": "foo",
+				"name": name,
 				"type": "production",
 			},
 		},

@@ -23,13 +23,21 @@ type K8S interface {
 // k8SClient implementation of K8S interface
 type k8SClient struct {
 	log       *zap.Logger
-	clientset *kubernetes.Clientset
+	clientset kubernetes.Interface
 }
 
 var _ K8S = (*k8SClient)(nil)
 
 // New instace of K8S concrete implementation
-func New(logger *zap.Logger) (K8S, error) {
+func New(logger *zap.Logger, clientset kubernetes.Interface) (K8S, error) {
+	return &k8SClient{
+		log:       logger,
+		clientset: clientset,
+	}, nil
+}
+
+// NewClientset create kubernetes clientset
+func NewClientset() (kubernetes.Interface, error) {
 	var kubeconf string
 	if home := homeDir(); home != "" {
 		kubeconf = filepath.Join(home, ".kube", "config")
@@ -44,11 +52,7 @@ func New(logger *zap.Logger) (K8S, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	return &k8SClient{
-		log:       logger,
-		clientset: clientset,
-	}, nil
+	return clientset, nil
 }
 
 func homeDir() string {

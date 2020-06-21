@@ -17,8 +17,10 @@ func (c *CronScheduler) Add(job *job.SchedulerJob) (jobID string, err error) {
 		c.log.Info("The job started", zap.String("job_name", job.Cron), zap.Time("start_time", startTime),
 			zap.String("image_to_execute", job.Image), zap.String("container_args", job.Args),
 		)
-
-		//time.Sleep(10 * time.Second)
+		err := c.k8s.CreatePod(job.Name, c.k8s.GetCurrentNamespace())
+		if err != nil {
+			c.log.Error("cron Add", zap.Error(err))
+		}
 		c.log.Info("The job has ended", zap.String("job_name", job.Name),
 			zap.Int64("execution_time", time.Since(startTime).Milliseconds()))
 	})

@@ -16,12 +16,15 @@ import (
 
 func InitializeServer() (*grpc.Server, error) {
 	zapLogger := logger.New()
-	k8S, err := k8s.New(zapLogger)
+	kubernetesInterface, err := k8s.NewClientset()
+	if err != nil {
+		return nil, err
+	}
+	k8S, err := k8s.New(zapLogger, kubernetesInterface)
 	if err != nil {
 		return nil, err
 	}
 	schedulerScheduler := scheduler.New(zapLogger, k8S)
 	server := New(zapLogger, schedulerScheduler)
-
 	return server, nil
 }

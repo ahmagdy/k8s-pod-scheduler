@@ -11,6 +11,6 @@ import (
 )
 
 func InitializeServer() (*grpc.Server, error) {
-	wire.Build(logger.New, k8s.New, scheduler.New, New)
+	wire.Build(logger.New, k8s.NewClientset, k8s.New, scheduler.New, New)
 	return &grpc.Server{}, nil
 }

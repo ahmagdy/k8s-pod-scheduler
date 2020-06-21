@@ -3,10 +3,11 @@ module github.com/Ahmad-Magdy/k8s-pod-scheduler
 go 1.14
 
 require (
+	github.com/golang/mock v1.4.3
 	github.com/golang/protobuf v1.4.2
 	github.com/google/wire v0.4.0
 	github.com/robfig/cron/v3 v3.0.1
-	github.com/stretchr/testify v1.6.0 // indirect
+	github.com/stretchr/testify v1.6.0
 	go.uber.org/zap v1.15.0
 	golang.org/x/net v0.0.0-20200602114024-627f9648deb9 // indirect
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
@@ -14,6 +15,7 @@ require (
 	google.golang.org/grpc v1.29.1
 	google.golang.org/protobuf v1.24.0
 	gopkg.in/yaml.v2 v2.3.0 // indirect
+	gotest.tools v2.2.0+incompatible
 	k8s.io/api v0.16.9
 	k8s.io/apimachinery v0.16.9
 	k8s.io/client-go v0.16.9
