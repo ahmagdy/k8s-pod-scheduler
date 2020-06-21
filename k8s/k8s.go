@@ -36,7 +36,6 @@ func New(logger *zap.Logger) (K8S, error) {
 	}
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconf)
 	if err != nil {
-		logger.Warn("CATCH HERE")
 		return nil, err
 	}
 
