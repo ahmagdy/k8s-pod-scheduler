@@ -6,6 +6,7 @@ import (
 	"github.com/Ahmad-Magdy/k8s-pod-scheduler/job"
 )
 
+// Add add a new job to the scheduler
 func (s *K8SgRPC) Add(ctx context.Context, req *job.AddJobRequest) (*job.AddJobResponse, error) {
 	// TODO: Validate input fields
 	j := job.SchedulerJobFromJob(req.Job)
