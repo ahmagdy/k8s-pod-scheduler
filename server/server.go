@@ -3,8 +3,8 @@ package server
 import (
 	"go.uber.org/zap"
 
-	job "github.com/Ahmad-Magdy/k8s-pod-scheduler/job"
-	sc "github.com/Ahmad-Magdy/k8s-pod-scheduler/scheduler"
+	job "github.com/ahmagdy/k8s-pod-scheduler/job"
+	sc "github.com/ahmagdy/k8s-pod-scheduler/scheduler"
 
 	"google.golang.org/grpc"
 )

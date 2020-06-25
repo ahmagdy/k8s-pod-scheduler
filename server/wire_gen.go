@@ -6,9 +6,9 @@
 package server
 
 import (
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/k8s"
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/logger"
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/scheduler"
+	"github.com/ahmagdy/k8s-pod-scheduler/k8s"
+	"github.com/ahmagdy/k8s-pod-scheduler/logger"
+	"github.com/ahmagdy/k8s-pod-scheduler/scheduler"
 	"google.golang.org/grpc"
 )
 

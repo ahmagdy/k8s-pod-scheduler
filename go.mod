@@ -1,4 +1,4 @@
-module github.com/Ahmad-Magdy/k8s-pod-scheduler
+module github.com/ahmagdy/k8s-pod-scheduler
 
 go 1.14
 

@@ -5,7 +5,7 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/k8s"
+	"github.com/ahmagdy/k8s-pod-scheduler/k8s"
 
 	"go.uber.org/zap/zaptest"
 	"k8s.io/client-go/kubernetes/fake"

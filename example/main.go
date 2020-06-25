@@ -3,10 +3,10 @@ package main
 import (
 	"net"
 
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/logger"
+	"github.com/ahmagdy/k8s-pod-scheduler/logger"
 	"go.uber.org/zap"
 
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/server"
+	"github.com/ahmagdy/k8s-pod-scheduler/server"
 )
 
 const (

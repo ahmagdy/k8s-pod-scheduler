@@ -5,7 +5,7 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/job"
+	"github.com/ahmagdy/k8s-pod-scheduler/job"
 )
 
 // Add to register a job in the scheduler

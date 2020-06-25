@@ -1,8 +1,8 @@
 package scheduler
 
 import (
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/job"
-	"github.com/Ahmad-Magdy/k8s-pod-scheduler/k8s"
+	"github.com/ahmagdy/k8s-pod-scheduler/job"
+	"github.com/ahmagdy/k8s-pod-scheduler/k8s"
 	"github.com/robfig/cron/v3"
 	"go.uber.org/zap"
 )

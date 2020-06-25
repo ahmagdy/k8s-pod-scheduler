@@ -1,4 +1,4 @@
-## Kubernetes(K8S) Pod Scheduler ![Go](https://github.com/Ahmad-Magdy/k8s-pod-scheduler/workflows/Go/badge.svg?branch=master)
+## Kubernetes(K8S) Pod Scheduler ![Go](https://github.com/ahmagdy/k8s-pod-scheduler/workflows/Go/badge.svg?branch=master)
 A simple and lightweight go tool that can run on top of K8s to schedule and run long-running tasks.
 
 It's something smaller and simpler than Apache Airflow for small or simple tasks. Instead of using a workflow management tool with a lot of overhead, this tool can be more fit for simple and small jobs.
