@@ -14,9 +14,9 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeServer() (*grpc.Server, error) {
+func InitializeServer(isInCluster bool) (*grpc.Server, error) {
 	zapLogger := logger.New()
-	kubernetesInterface, err := k8s.NewClientset()
+	kubernetesInterface, err := k8s.NewClientset(isInCluster)
 	if err != nil {
 		return nil, err
 	}

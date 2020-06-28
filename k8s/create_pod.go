@@ -27,7 +27,7 @@ func (k8s *k8SClient) CreatePod(name string, namespace string) error {
 			Containers: []v1.Container{
 				{
 					Name:                   name,
-					Image:                  "node",
+					Image:                  "sche:latest",
 					TerminationMessagePath: v1.TerminationMessagePathDefault,
 					ImagePullPolicy:        v1.PullIfNotPresent,
 					SecurityContext:        securitycontext.ValidSecurityContextWithContainerDefaults(),
