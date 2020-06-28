@@ -10,19 +10,27 @@ import (
 
 // Add to register a job in the scheduler
 func (c *CronScheduler) Add(job *job.SchedulerJob) (jobID string, err error) {
-	c.log.Info("Adding job", zap.String("job_name", job.Name), zap.String("cron_expression", job.Cron))
+	c.log.Info("Adding job",
+		zap.String("job_name", job.Name),
+		zap.String("cron_expression", job.Cron))
+
 	id, err := c.cron.AddFunc(job.Cron, func() {
 		// 15:04:05
 		startTime := time.Now()
-		c.log.Info("The job started", zap.String("job_name", job.Cron), zap.Time("start_time", startTime),
-			zap.String("image_to_execute", job.Image), zap.String("container_args", job.Args),
+		c.log.Info("The job started",
+			zap.String("job_name", job.Cron),
+			zap.Time("start_time", startTime),
+			zap.String("image_to_execute", job.Image),
+			zap.String("container_args", job.Args),
 		)
-		err := c.k8s.CreatePod(job.Name, c.k8s.GetCurrentNamespace())
+		err := c.k8s.CreatePod(job.Name, "")
 		if err != nil {
 			c.log.Error("cron Add", zap.Error(err))
 		}
-		c.log.Info("The job has ended", zap.String("job_name", job.Name),
-			zap.Int64("execution_time", time.Since(startTime).Milliseconds()))
+		c.log.Info("The job has ended",
+			zap.String("job_name", job.Name),
+			zap.Duration("execution_time", time.Since(startTime).Round(time.Millisecond)),
+		)
 	})
 	if err != nil {
 		return "", err
