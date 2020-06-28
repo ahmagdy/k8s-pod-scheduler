@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 
 	"go.uber.org/zap"
@@ -37,14 +38,25 @@ func New(logger *zap.Logger, clientset kubernetes.Interface) (K8S, error) {
 }
 
 // NewClientset create kubernetes clientset
-func NewClientset() (kubernetes.Interface, error) {
-	var kubeconf string
-	if home := homeDir(); home != "" {
-		kubeconf = filepath.Join(home, ".kube", "config")
-	}
-	config, err := clientcmd.BuildConfigFromFlags("", kubeconf)
-	if err != nil {
-		return nil, err
+func NewClientset(isInCluster bool) (kubernetes.Interface, error) {
+	var config *rest.Config
+	var err error
+	if !isInCluster {
+		var kubeconf string
+		if home := homeDir(); home != "" {
+			kubeconf = filepath.Join(home, ".kube", "config")
+		}
+		config, err = clientcmd.BuildConfigFromFlags("", kubeconf)
+		if err != nil {
+			return nil, err
+		}
+
+	} else {
+		config, err = rest.InClusterConfig()
+		if err != nil {
+			return nil, err
+		}
+
 	}
 
 	// create the clientset

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"net"
 
 	"github.com/ahmagdy/k8s-pod-scheduler/logger"
@@ -13,9 +14,16 @@ const (
 	_port = ":8080"
 )
 
+var (
+	isInCluster = flag.Bool("is-in-cluster", true, "Is this pod running inside the cluster")
+)
+
 func main() {
+	flag.Parse()
+
 	log := logger.New()
-	server, err := server.InitializeServer()
+
+	server, err := server.InitializeServer(*isInCluster)
 	if err != nil {
 		log.Fatal("Error from init server", zap.Error(err))
 	}
