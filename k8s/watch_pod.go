@@ -18,17 +18,15 @@ func (k8s *k8SClient) WatchPod(name string, namespace string) error {
 		FieldSelector: fields.Set{"metadata.name": name}.String(),
 		LabelSelector: labels.Everything().String(),
 	})
-	k8s.log.Info("WATCHER")
 	if err != nil {
 		return err
 	}
+
 	func() {
 		for {
-			k8s.log.Info("HERE")
 			select {
 			case event, ok := <-watch.ResultChan():
 				if !ok {
-					k8s.log.Error("NOT OK")
 					return
 				}
 				k8s.log.Info("", zap.String("type", string(event.Type)))
