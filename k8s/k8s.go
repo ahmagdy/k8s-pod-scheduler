@@ -19,6 +19,7 @@ type K8S interface {
 	CreatePod(name string, namespace string) error
 	CreateNamespace(name string) error
 	DeletePod(name string, namespace string) error
+	WatchPod(name string, namespace string) error
 }
 
 // k8SClient implementation of K8S interface

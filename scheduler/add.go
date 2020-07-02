@@ -31,6 +31,7 @@ func (c *CronScheduler) Add(job *job.SchedulerJob) (jobID string, err error) {
 			zap.String("job_name", job.Name),
 			zap.Duration("execution_time", time.Since(startTime).Round(time.Millisecond)),
 		)
+		c.k8s.WatchPod(job.Name, "")
 	})
 	if err != nil {
 		return "", err

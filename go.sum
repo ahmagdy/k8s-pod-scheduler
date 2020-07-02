@@ -458,6 +458,7 @@ go.uber.org/zap v0.0.0-20180814183419-67bc79d13d15/go.mod h1:vwi/ZaCAaUcBkycHslx
 go.uber.org/zap v1.15.0 h1:ZZCA22JRF2gQE5FoNmhmrf7jeJJ2uhqDUNRYKm8dvmM=
 go.uber.org/zap v1.15.0/go.mod h1:Mb2vm2krFEG5DV0W9qcHBYFtp/Wku1cvYaqPsS/WYfc=
 go4.org v0.0.0-20180809161055-417644f6feb5/go.mod h1:MkTOUMDaeVYJUOUsaDXIhWPZYa1yOyC1qaOBpL57BhE=
+golang.org/x/build v0.0.0-20190927031335-2835ba2e683f h1:hXVePvSFG7tPGX4Pwk1d10ePFfoTCc0QmISfpKOHsS8=
 golang.org/x/build v0.0.0-20190927031335-2835ba2e683f/go.mod h1:fYw7AShPAhGMdXqA9gRadk/CcMsvLlClpE5oBwnS3dM=
 golang.org/x/crypto v0.0.0-20180426230345-b49d69b5da94/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
