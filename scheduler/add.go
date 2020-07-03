@@ -23,7 +23,7 @@ func (c *CronScheduler) Add(job *job.SchedulerJob) (jobID string, err error) {
 			zap.String("image_to_execute", job.Image),
 			zap.String("container_args", job.Args),
 		)
-		err := c.k8s.CreatePod(job.Name, "")
+		name, err := c.k8s.CreatePod(job.Name, "")
 		if err != nil {
 			c.log.Error("cron Add", zap.Error(err))
 		}
@@ -31,7 +31,7 @@ func (c *CronScheduler) Add(job *job.SchedulerJob) (jobID string, err error) {
 			zap.String("job_name", job.Name),
 			zap.Duration("execution_time", time.Since(startTime).Round(time.Millisecond)),
 		)
-		c.k8s.WatchPod(job.Name, "")
+		c.k8s.WatchPod(name, "")
 	})
 	if err != nil {
 		return "", err

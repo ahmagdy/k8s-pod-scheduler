@@ -7,7 +7,7 @@ import (
 	"k8s.io/kubernetes/pkg/securitycontext"
 )
 
-func (k8s *k8SClient) CreatePod(name string, namespace string) error {
+func (k8s *k8SClient) CreatePod(name string, namespace string) (string, error) {
 	if namespace == "" {
 		namespace = k8s.GetCurrentNamespace()
 	}
@@ -17,7 +17,7 @@ func (k8s *k8SClient) CreatePod(name string, namespace string) error {
 	)
 	pod, err := k8s.clientset.CoreV1().Pods(namespace).Create(&v1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
-			Name: name,
+			GenerateName: name,
 			Labels: map[string]string{
 				"name": name,
 				"type": "production",
@@ -39,9 +39,9 @@ func (k8s *k8SClient) CreatePod(name string, namespace string) error {
 			DNSPolicy:     v1.DNSDefault,
 		}})
 	if err != nil {
-		return err
+		return "", err
 	}
 	k8s.log.Info(pod.Name)
-	return nil
+	return pod.Name, nil
 
 }
