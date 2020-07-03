@@ -12,7 +12,7 @@ message Job{
 
 message Spec{
     google.protobuf.StringValue image = 1;
-    string args = 2;
+    repeated string args = 2;
     repeated string commands = 3;
 }
 

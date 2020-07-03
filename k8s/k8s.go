@@ -4,6 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/ahmagdy/k8s-pod-scheduler/job"
+
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 
@@ -16,7 +18,7 @@ import (
 type K8S interface {
 	GetPod(name string, namespace string) (*v1.Pod, error)
 	GetCurrentNamespace() string
-	CreatePod(name string, namespace string) (string, error)
+	CreatePod(job *job.SchedulerJob, namespace string) (string, error)
 	CreateNamespace(name string) error
 	DeletePod(name string, namespace string) error
 	WatchPod(name string, namespace string) error
@@ -30,7 +32,7 @@ type k8SClient struct {
 
 var _ K8S = (*k8SClient)(nil)
 
-// New instace of K8S concrete implementation
+// New instance of K8S concrete implementation
 func New(logger *zap.Logger, clientset kubernetes.Interface) (K8S, error) {
 	return &k8SClient{
 		log:       logger,

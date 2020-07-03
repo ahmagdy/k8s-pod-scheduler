@@ -5,7 +5,7 @@ type SchedulerJob struct {
 	Name     string
 	Cron     string
 	Image    string
-	Args     string
+	Args     []string
 	Commands []string
 }
 
