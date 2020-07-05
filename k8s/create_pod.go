@@ -42,7 +42,7 @@ func (k8s *k8SClient) CreatePod(job *job.SchedulerJob, namespace string) (string
 	if err != nil {
 		return "", err
 	}
-	k8s.log.Info(pod.Name)
+	k8s.log.Info(pod.GetGenerateName())
 	return pod.GetGenerateName(), nil
 
 }

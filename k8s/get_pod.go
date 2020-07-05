@@ -6,5 +6,8 @@ import (
 )
 
 func (k8s *k8SClient) GetPod(name string, namespace string) (*v1.Pod, error) {
+	if namespace == "" {
+		namespace = k8s.GetCurrentNamespace()
+	}
 	return k8s.clientset.CoreV1().Pods(namespace).Get(name, metav1.GetOptions{})
 }
