@@ -10,24 +10,11 @@ import (
 )
 
 func TestCreateNamespace(t *testing.T) {
-	tests := []struct {
-		name          string
-		namespace     string
-		expectedError error
-	}{
-		{
-			name:      "namespace is created",
-			namespace: "abcd",
-		},
-	}
+	k8sClient := newTestSimpleK8s(t)
+	namespace := "abcd"
 
-	for _, tc := range tests {
-		t.Run(tc.name, func(t *testing.T) {
-			k8sClient := newTestSimpleK8s(t)
-			err := k8sClient.CreateNamespace(tc.namespace)
-			require.Equal(t, tc.expectedError, err)
-		})
-	}
+	err := k8sClient.CreateNamespace(namespace)
+	require.Equal(t, nil, err)
 }
 
 func newTestSimpleK8s(t *testing.T) K8S {
