@@ -48,11 +48,14 @@ func (k8s *k8SClient) watchStatus(watcher watch.Interface, name string, namespac
 				} else if status == v1.PodSucceeded {
 					k8s.log.Info("Pod succeeded")
 				}
+
 				watcher.Stop()
+
 				err := k8s.DeletePod(name, namespace)
 				if err != nil {
 					k8s.log.Error("Couldn't delete the pod", zap.Error(err))
 				}
+				return
 			}
 		case <-time.After(5 * time.Minute):
 			fmt.Println("timeout to wait for pod active")
