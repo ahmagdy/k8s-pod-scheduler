@@ -1,5 +1,7 @@
 package job
 
+import jobidl "github.com/ahmagdy/k8s-pod-scheduler/job/idl"
+
 // SchedulerJob a representation for a job that will be executed
 type SchedulerJob struct {
 	Name     string
@@ -10,7 +12,7 @@ type SchedulerJob struct {
 }
 
 // SchedulerJobFromJob map Job input into a SchedulerJob representation
-func SchedulerJobFromJob(job *Job) *SchedulerJob {
+func SchedulerJobFromJob(job *jobidl.Job) *SchedulerJob {
 	sj := &SchedulerJob{
 		Name: job.Name.GetValue(),
 		Cron: job.Cron.GetValue(),

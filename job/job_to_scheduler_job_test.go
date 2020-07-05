@@ -3,6 +3,8 @@ package job
 import (
 	"testing"
 
+	jobidl "github.com/ahmagdy/k8s-pod-scheduler/job/idl"
+
 	"github.com/stretchr/testify/require"
 
 	"github.com/golang/protobuf/ptypes/wrappers"
@@ -11,12 +13,12 @@ import (
 func TestSchedulerJobFromJob(t *testing.T) {
 	tests := []struct {
 		name     string
-		job      *Job
+		job      *jobidl.Job
 		expected *SchedulerJob
 	}{
 		{
 			name: "job is mapped to scheduler job",
-			job: &Job{
+			job: &jobidl.Job{
 				Name: &wrappers.StringValue{Value: "XYZ"},
 				Cron: &wrappers.StringValue{Value: "* * * * * *"},
 				Spec: &Spec{
@@ -33,7 +35,7 @@ func TestSchedulerJobFromJob(t *testing.T) {
 		},
 		{
 			name: "given job without specs, it should map it without specs properties",
-			job: &Job{
+			job: &jobidl.Job{
 				Name: &wrappers.StringValue{Value: "XYZ"},
 				Cron: &wrappers.StringValue{Value: "* * * * * *"},
 			},
