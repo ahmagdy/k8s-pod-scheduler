@@ -21,14 +21,14 @@ func TestSchedulerJobFromJob(t *testing.T) {
 				Cron: &wrappers.StringValue{Value: "* * * * * *"},
 				Spec: &Spec{
 					Image: &wrappers.StringValue{Value: "magdy.dev/xyz:version1"},
-					Args:  "--yz",
+					Args:  []string{"--yz"},
 				},
 			},
 			expected: &SchedulerJob{
 				Name:  "XYZ",
 				Cron:  "* * * * * *",
 				Image: "magdy.dev/xyz:version1",
-				Args:  "--yz",
+				Args:  []string{"--yz"},
 			},
 		},
 		{
