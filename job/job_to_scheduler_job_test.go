@@ -21,7 +21,7 @@ func TestSchedulerJobFromJob(t *testing.T) {
 			job: &jobidl.Job{
 				Name: &wrappers.StringValue{Value: "XYZ"},
 				Cron: &wrappers.StringValue{Value: "* * * * * *"},
-				Spec: &Spec{
+				Spec: &jobidl.Spec{
 					Image: &wrappers.StringValue{Value: "magdy.dev/xyz:version1"},
 					Args:  []string{"--yz"},
 				},
