@@ -13,7 +13,7 @@ import (
 	testcore "k8s.io/client-go/testing"
 )
 
-func TestMYTest(t *testing.T) {
+func TestWatchPodStatus(t *testing.T) {
 	k8sClient, watcher := newWatcherClient(t)
 	podName := "mybod"
 	namespace := "mynamespace"

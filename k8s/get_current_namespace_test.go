@@ -1,6 +1,7 @@
 package k8s
 
 import (
+	"io/ioutil"
 	"os"
 	"testing"
 
@@ -37,6 +38,9 @@ func Test_returns_k8s_secret_when_env_var_not_set(t *testing.T) {
 	readFile = func(filePath string) ([]byte, error) {
 		return []byte(namespace), nil
 	}
+	// Because this monkey patching will affect other tests.
+	// readFile is shared with the other tests in this directory
+	defer func() { readFile = ioutil.ReadFile }()
 
 	namespaceResult := k8sClient.GetCurrentNamespace()
 
