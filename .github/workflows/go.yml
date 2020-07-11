@@ -50,6 +50,9 @@ jobs:
       run: |
         go build -v ./...
 
+    - name:
+      run: go list ./... | grep -v /job/idl
+
     - name: Test
       run: go test -v $(go list ./... | grep -v /job/idl) --coverprofile coverage.out
     
