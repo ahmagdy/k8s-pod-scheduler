@@ -62,7 +62,6 @@ func NewClientset(isInCluster bool) (kubernetes.Interface, error) {
 
 	}
 
-	// create the clientset
 	clientset, err := kubernetes.NewForConfig(config)
 	if err != nil {
 		return nil, err
