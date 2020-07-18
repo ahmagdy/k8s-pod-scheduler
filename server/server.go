@@ -17,11 +17,15 @@ type K8SgRPC struct {
 
 // New instance of the GRPC server
 func New(logger *zap.Logger, scheduler sc.Scheduler) *grpc.Server {
-	server := &K8SgRPC{
-		log:       logger,
-		scheduler: scheduler,
-	}
+	server := newGRPCServer(logger, scheduler)
 	grpcServer := grpc.NewServer()
 	jobidl.RegisterJobServiceServer(grpcServer, server)
 	return grpcServer
+}
+
+func newGRPCServer(logger *zap.Logger, scheduler sc.Scheduler) *K8SgRPC {
+	return &K8SgRPC{
+		log:       logger,
+		scheduler: scheduler,
+	}
 }
