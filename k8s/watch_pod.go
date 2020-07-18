@@ -35,10 +35,10 @@ func (k8s *k8SClient) watchStatus(watcher watch.Interface, name string, namespac
 			if !ok {
 				return
 			}
-			k8s.log.Info("", zap.String("type", string(event.Type)))
+			k8s.log.Debug("", zap.String("type", string(event.Type)))
 
 			resp := event.Object.(*v1.Pod)
-			k8s.log.Info("Pod status:", zap.String("status", string(resp.Status.Phase)))
+			k8s.log.Debug("Pod status:", zap.String("status", string(resp.Status.Phase)))
 
 			status := resp.Status.Phase
 			if status != v1.PodPending && status != v1.PodRunning {
