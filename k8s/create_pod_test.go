@@ -45,12 +45,15 @@ func TestCreatePod(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			k8sClient := newTestSimpleK8s(t)
-			name, err := k8sClient.CreatePod(tc.input.job, tc.input.namespace)
+			_, err := k8sClient.CreatePod(tc.input.job, tc.input.namespace)
+
 			require.Equal(t, tc.expectedError, err)
 			pod, err := k8sClient.(*k8SClient).clientset.CoreV1().Pods("").List(v1.ListOptions{})
 			require.Equal(t, tc.expectedNamespace, pod.Items[0].Namespace)
 
-			require.Contains(t, name, tc.input.job.Name)
+			// It should be the returned name from k8sClient.CreatePod but k8s fake client implementation doesn't evaluate the pod
+			// require.Contains(t, name, tc.input.job.Name)
+			require.Contains(t, pod.Items[0].GetGenerateName(), tc.input.job.Name)
 		})
 	}
 }
