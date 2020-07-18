@@ -1,0 +1,35 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: podscheduler
+  namespace: podscheduler
+spec:
+  selector:
+    matchLabels:
+      app: podscheduler
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: podscheduler
+    spec:
+      containers:
+        - name: ps
+          image: ahmedmagdi/k8s-pod-scheduler:0.0.1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podscheduler
+  namespace: podscheduler
+spec:
+  selector:
+    app: podscheduler
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30007

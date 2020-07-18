@@ -35,7 +35,7 @@ You can run it from your machine directly or use this image as an example from d
 
 ```bash
 docker pull ahmedmagdi/k8s-pod-scheduler:0.0.1
-kubectl apply -f service.yaml
+kubectl apply -f ./example/k8s-deployment.yaml
 ``` 
 This will start a pod listening on port `30007`. You can call it then using BloomRPC or similar tools.
 
