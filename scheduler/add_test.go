@@ -18,7 +18,7 @@ func TestAdd(t *testing.T) {
 			job:  &job.SchedulerJob{Name: "first job", Cron: "* * * * * *"},
 		},
 		{
-			name:         "returns error give invalid cron",
+			name:         "returns error given invalid cron",
 			job:          &job.SchedulerJob{Name: "another job", Cron: "* * * *"},
 			returnsError: true,
 		},

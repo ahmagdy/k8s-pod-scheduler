@@ -55,7 +55,7 @@ jobs:
           go build -v ./...
 
       - name: Test
-        run: go test -v $(go list ./... | grep -v /job/idl) --coverprofile coverage.out
+        run: go test -v $(go list ./... | grep -v '/job/idl\|/example') --coverprofile coverage.out
 
       - name: Codecov
         uses: codecov/codecov-action@v1.0.10

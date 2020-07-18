@@ -7,18 +7,21 @@ It's something smaller and simpler than Apache Airflow for small or simple tasks
 When a user wants to read jobs from a remote-store and schedule them accordingly.
 
 ## User guide
-Assuming you have a backend that goes doing some process to come with jobs that need to be scheduled. If you don't have a program and you want to test the service you can use any gRPC client like [BloomRPC](https://github.com/uw-labs/bloomrpc) or [gRPCurl](https://github.com/fullstorydev/grpcurl).
+Assuming you have a backend or a service that does some processes and output some jobs or recurring tasks that need to be scheduled. You can connect this service with k8s-pod-scheduler easily.
 
-As you can see in idl >> job.proto. The service has only one method which is Add to add a new job to the scheduler.
+The recommended way is to use the proto interface provided at `idl/job.proto` and call it via gRPC.
+Feel free to add REST or CLI support if your use case needs it.
+
+If you want to test the service without implementing a client, you can use any gRPC client like [BloomRPC](https://github.com/uw-labs/bloomrpc) or [gRPCurl](https://github.com/fullstorydev/grpcurl).
+
+As you can see in  The service has only one method which is Add to add a new job to the scheduler.
 This job will accept these parameters:
 - Name string
 - Cron expression string. It accepts cron expressions with seconds. Also, "@daily" and "@every <duration>"
 
 The service will add your job to the scheduler, run it as scheduled, and kill the pod when the job is done. 
-Note that when the job the scheduler will kill it as well.
+Note that when the job fails, the scheduler will kill it as well.
 
-The recommended way is to use the proto interface provided above and call it via gRPC.
-Feel free to add REST or CLI support if your use case needs it.
 
 #### Supported Fields:
  
