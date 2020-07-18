@@ -66,6 +66,12 @@ my-first-jobw7qld               0/1     Terminating         0          6s
 my-first-jobw7qld               0/1     Terminating         0          6s
 ```
 
+### Local Development:
+```bash
+make setup
+```
+Will setup all the needed tools and dependencies.
+
 ### TODO:
 - Store registered jobs state in a persistent store instead of storing them in memory.
 - Provide API to update, and remove tasks. 
