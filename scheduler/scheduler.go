@@ -1,3 +1,4 @@
+//go:generate mockgen -source=scheduler.go -package=scheduler -destination=scheduler_mock.go
 package scheduler
 
 import (
