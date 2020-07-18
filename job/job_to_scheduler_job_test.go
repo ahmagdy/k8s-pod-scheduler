@@ -6,8 +6,6 @@ import (
 	jobidl "github.com/ahmagdy/k8s-pod-scheduler/job/idl"
 
 	"github.com/stretchr/testify/require"
-
-	"github.com/golang/protobuf/ptypes/wrappers"
 )
 
 func TestSchedulerJobFromJob(t *testing.T) {
@@ -22,7 +20,7 @@ func TestSchedulerJobFromJob(t *testing.T) {
 				Name: "XYZ",
 				Cron: "* * * * * *",
 				Spec: &jobidl.Spec{
-					Image: &wrappers.StringValue{Value: "magdy.dev/xyz:version1"},
+					Image: "magdy.dev/xyz:version1",
 					Args:  []string{"--yz"},
 				},
 			},

@@ -34,7 +34,7 @@ func TestGetPod(t *testing.T) {
 
 			require.NoError(t, err)
 			require.NotNil(t, pod)
-			require.Contains(t, tc.podName, pod.GetGenerateName())
+			require.Contains(t, tc.podName, pod.GetName())
 		})
 	}
 }
