@@ -30,6 +30,8 @@ jobs:
         run: |
           go get -v -t -d ./...
           go get -u github.com/golang/protobuf/protoc-gen-go
+          go get github.com/golang/mock/mockgen@1.4.3
+          go get github.com/google/wire/cmd/wire
           go install golang.org/x/lint/golint
           if [ -f Gopkg.toml ]; then
               curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
