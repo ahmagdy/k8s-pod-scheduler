@@ -2,68 +2,67 @@ name: Go
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.14
+        id: go
 
-    - name: Set up Go 1.x
-      uses: actions/setup-go@v2
-      with:
-        go-version: ^1.14
-      id: go
-      
-    - name: Setup protoc
-      uses: arduino/setup-protoc@v1.1.0
-      with:
-        # Version to use. Example: 3.9.1
-        version: 3.6.1
-    
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v2
+      - name: Setup protoc
+        uses: arduino/setup-protoc@v1.1.0
+        with:
+          # Version to use. Example: 3.9.1
+          version: 3.6.1
 
-    - name: Get dependencies
-      run: |
-        go get -v -t -d ./...
-        go get -u github.com/golang/protobuf/protoc-gen-go
-        go install golang.org/x/lint/golint
-        if [ -f Gopkg.toml ]; then
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-            dep ensure
-        fi
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
 
-    - name: Generate Proto
-      run: |
-        bash ./scripts/generate_proto.sh
+      - name: Get dependencies
+        run: |
+          go get -v -t -d ./...
+          go get -u github.com/golang/protobuf/protoc-gen-go
+          go install golang.org/x/lint/golint
+          if [ -f Gopkg.toml ]; then
+              curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+              dep ensure
+          fi
 
-    - name: Lint
-      run: |
-        golint -set_exit_status ./...
+      - name: Generate Proto
+        run: |
+          bash ./scripts/generate_proto.sh
 
-    - name: Build
-      run: |
-        go build -v ./...
+      - name: Generate Go
+        run: |
+          go generate ./...
 
-    - name:
-      run: go list ./... | grep -v /job/idl
+      - name: Lint
+        run: |
+          golint -set_exit_status ./...
 
-    - name: Test
-      run: go test -v $(go list ./... | grep -v /job/idl) --coverprofile coverage.out
-    
-    - name: Codecov
-      uses: codecov/codecov-action@v1.0.10
-      with:
-        # User defined upload name. Visible in Codecov UI
-        name: codecov-umbrella# optional
-        # Path to coverage file to upload
-        file: ./coverage.out
-        # Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)
-        flags: unittests# optional
-        # Specify whether or not CI build should fail if Codecov runs into an error during upload
-        fail_ci_if_error: false # optional
+      - name: Build
+        run: |
+          go build -v ./...
+
+      - name: Test
+        run: go test -v $(go list ./... | grep -v /job/idl) --coverprofile coverage.out
+
+      - name: Codecov
+        uses: codecov/codecov-action@v1.0.10
+        with:
+          # User defined upload name. Visible in Codecov UI
+          name: codecov-umbrella# optional
+          # Path to coverage file to upload
+          file: ./coverage.out
+          # Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)
+          flags: unittests# optional
+          # Specify whether or not CI build should fail if Codecov runs into an error during upload
+          fail_ci_if_error: false # optional
