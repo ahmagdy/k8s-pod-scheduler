@@ -1,5 +1,6 @@
-//go:generate mockgen -source=scheduler.go -package=scheduler -destination=scheduler_mock.go
 package scheduler
+
+//go:generate mockgen -source=scheduler.go -package=scheduler -destination=scheduler_mock.go
 
 import (
 	"github.com/ahmagdy/k8s-pod-scheduler/job"
