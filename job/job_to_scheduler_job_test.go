@@ -19,8 +19,8 @@ func TestSchedulerJobFromJob(t *testing.T) {
 		{
 			name: "job is mapped to scheduler job",
 			job: &jobidl.Job{
-				Name: &wrappers.StringValue{Value: "XYZ"},
-				Cron: &wrappers.StringValue{Value: "* * * * * *"},
+				Name: "XYZ",
+				Cron: "* * * * * *",
 				Spec: &jobidl.Spec{
 					Image: &wrappers.StringValue{Value: "magdy.dev/xyz:version1"},
 					Args:  []string{"--yz"},
@@ -36,8 +36,8 @@ func TestSchedulerJobFromJob(t *testing.T) {
 		{
 			name: "given job without specs, it should map it without specs properties",
 			job: &jobidl.Job{
-				Name: &wrappers.StringValue{Value: "XYZ"},
-				Cron: &wrappers.StringValue{Value: "* * * * * *"},
+				Name: "XYZ",
+				Cron: "* * * * * *",
 			},
 			expected: &SchedulerJob{
 				Name: "XYZ",

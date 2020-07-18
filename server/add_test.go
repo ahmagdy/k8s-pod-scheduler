@@ -6,8 +6,6 @@ import (
 
 	"go.uber.org/zap/zaptest"
 
-	"github.com/golang/protobuf/ptypes/wrappers"
-
 	jobidl "github.com/ahmagdy/k8s-pod-scheduler/job/idl"
 
 	"github.com/ahmagdy/k8s-pod-scheduler/scheduler"
@@ -28,8 +26,8 @@ func TestAdd(t *testing.T) {
 			name: "new job is being registered",
 			request: &jobidl.AddJobRequest{
 				Job: &jobidl.Job{
-					Name: &wrappers.StringValue{Value: "foobar"},
-					Cron: &wrappers.StringValue{Value: "1 * * * * *"},
+					Name: "foobar",
+					Cron: "1 * * * * *",
 				},
 			},
 			expectedResult: &jobidl.AddJobResponse{
@@ -45,7 +43,7 @@ func TestAdd(t *testing.T) {
 			mockedScheduler.
 				EXPECT().
 				Add(gomock.Any()).
-				Return(tc.request.Job.Name.Value, tc.expectedError).
+				Return(tc.request.Job.Name, tc.expectedError).
 				AnyTimes()
 
 			grpcServer := newGRPCServer(zaptest.NewLogger(t), mockedScheduler)

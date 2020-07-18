@@ -1,17 +1,20 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
 package job;
 option go_package = "job/idl;jobidl";
 
 
 message Job{
-    google.protobuf.StringValue name = 1;
-    google.protobuf.StringValue cron = 4;
+    // The name of the job. It can't be null or empty.
+    string name = 1;
+    // The cron expression can be cron with seconds, "@daily" or "@every <duration>" like "@every 0h0m5s".
+    string cron = 4;
+    // The spec of the container which will run.
     Spec spec = 3;
 }
 
 message Spec{
-    google.protobuf.StringValue image = 1;
+    // The image name from
+    string image = 1;
     repeated string args = 2;
     repeated string commands = 3;
 }

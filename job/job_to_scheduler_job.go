@@ -14,11 +14,11 @@ type SchedulerJob struct {
 // SchedulerJobFromJob map Job input into a SchedulerJob representation
 func SchedulerJobFromJob(job *jobidl.Job) *SchedulerJob {
 	sj := &SchedulerJob{
-		Name: job.Name.GetValue(),
-		Cron: job.Cron.GetValue(),
+		Name: job.Name,
+		Cron: job.Cron,
 	}
 	if job.Spec != nil {
-		sj.Image = job.Spec.Image.GetValue()
+		sj.Image = job.Spec.GetImage()
 		sj.Args = job.Spec.GetArgs()
 		sj.Commands = job.Spec.GetCommands()
 	}
