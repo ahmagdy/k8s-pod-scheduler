@@ -1,5 +1,7 @@
 package k8s
 
+//go:generate mockgen -source=k8s.go -package=k8s -destination=k8s_mock.go
+
 import (
 	"os"
 	"path/filepath"

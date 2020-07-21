@@ -47,7 +47,7 @@ func (k8s *k8SClient) CreateCronJob(job *job.SchedulerJob, namespace string) (st
 		},
 	}
 
-	cronObj, err := k8s.clientset.BatchV1beta1().CronJobs(namespace).Create(&v1beta1.CronJob{
+	cronJob, err := k8s.clientset.BatchV1beta1().CronJobs(namespace).Create(&v1beta1.CronJob{
 		ObjectMeta: objectMeta,
 		Spec: v1beta1.CronJobSpec{
 			Schedule:          job.Cron,
@@ -60,8 +60,8 @@ func (k8s *k8SClient) CreateCronJob(job *job.SchedulerJob, namespace string) (st
 	if err != nil {
 		return "", err
 	}
-	k8s.log.Info(cronObj.GetName())
+	k8s.log.Info(cronJob.GetName())
 
-	return cronObj.GetName(), nil
+	return cronJob.GetName(), nil
 
 }
