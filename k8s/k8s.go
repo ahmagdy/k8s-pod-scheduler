@@ -18,6 +18,7 @@ import (
 type K8S interface {
 	GetPod(name string, namespace string) (*v1.Pod, error)
 	GetCurrentNamespace() string
+	CreateCronJob(job *job.SchedulerJob, namespace string) (string, error)
 	CreatePod(job *job.SchedulerJob, namespace string) (string, error)
 	CreateNamespace(name string) error
 	DeletePod(name string, namespace string) error
