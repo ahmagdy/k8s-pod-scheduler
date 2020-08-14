@@ -18,7 +18,7 @@ jobs:
         id: go
 
       - name: Setup protoc
-        uses: arduino/setup-protoc@v1.1.0
+        uses: arduino/setup-protoc@v1
         with:
           # Version to use. Example: 3.9.1
           version: 3.6.1
