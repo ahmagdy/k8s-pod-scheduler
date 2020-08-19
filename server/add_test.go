@@ -4,6 +4,10 @@ import (
 	"context"
 	"testing"
 
+	job "github.com/ahmagdy/k8s-pod-scheduler/job"
+
+	"github.com/ahmagdy/k8s-pod-scheduler/k8s"
+
 	"go.uber.org/zap/zaptest"
 
 	jobidl "github.com/ahmagdy/k8s-pod-scheduler/job/idl"
@@ -37,16 +41,19 @@ func TestAdd(t *testing.T) {
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
+			schedulerJob := job.SchedulerJobFromJob(tc.request.Job)
 			ctrl := gomock.NewController(t)
 
 			mockedScheduler := scheduler.NewMockScheduler(ctrl)
-			mockedScheduler.
+			k := k8s.NewMockK8S(ctrl)
+			k.
 				EXPECT().
-				Add(gomock.Any()).
+				CreateCronJob(schedulerJob, gomock.Any()).
 				Return(tc.request.Job.Name, tc.expectedError).
 				AnyTimes()
+			logger := zaptest.NewLogger(t)
 
-			grpcServer := newGRPCServer(zaptest.NewLogger(t), mockedScheduler)
+			grpcServer := newGRPCServer(logger, mockedScheduler, k)
 			res, err := grpcServer.Add(context.Background(), tc.request)
 
 			if tc.expectedError != nil {

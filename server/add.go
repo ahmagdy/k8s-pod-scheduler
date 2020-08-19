@@ -12,7 +12,7 @@ import (
 func (s *K8SgRPC) Add(ctx context.Context, req *jobidl.AddJobRequest) (*jobidl.AddJobResponse, error) {
 	// TODO: Validate input fields
 	j := job.SchedulerJobFromJob(req.Job)
-	id, err := s.scheduler.Add(j)
+	id, err := s.k8s.CreateCronJob(j, "")
 	if err != nil {
 		return nil, err
 	}

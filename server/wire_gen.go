@@ -25,6 +25,6 @@ func InitializeServer(isInCluster bool) (*grpc.Server, error) {
 		return nil, err
 	}
 	schedulerScheduler := scheduler.New(zapLogger, k8S)
-	server := New(zapLogger, schedulerScheduler)
+	server := New(zapLogger, schedulerScheduler, k8S)
 	return server, nil
 }
